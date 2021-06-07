@@ -2,68 +2,113 @@
 
 @section('content')
 
-    <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
+    <div class="masthead">
 
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-                    <a class="navbar-brand" href="#">AdminPanel</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/admin">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/konduktor/list">Konduktorzy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users/list">Użytkownicy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+
+        @if(session()->has('message'))
+        <div class="container">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Gratulacje!</strong> {{session()->get('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
-        <p></p>
-    <div class="container">
+        @endif
+
+
+
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Dodaj Konduktora</h2>
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <form action="{{route('konduktor.store')}}" method="POST">
+                {{csrf_field()}}
+                <div class="form-floating">
+                    <input class="form-control" id="name" name="name" type="text" placeholder="Wpisz imie..." />
+                    <label for="inputName">Imie</label>
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" id="surname" name="surname" type="text" placeholder="Wpisz nazwisko..." />
+                    <label for="inputName">Nazwisko</label>
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" id="email" name="email" type="email" placeholder="Wpisz email..." />
+                    <label for="inputEmail">E-mail</label>
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" id="password" name="password" type="text" placeholder="Wpisz hasło..." />
+                    <label for="inputName">Hasło</label>
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="Wpisz numer telefonu..." />
+                    <label for="inputPhone">Numer Telefonu</label>
+                </div>
+
+
+                <br />
+                <button class="btn btn-primary btn-xl" type="submit">Dodaj Konduktora</button>
+            </form>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="masthead">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Lista Konduktorów</h2>
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th class="table-success" scope="col">#</th>
+            <th class="table-success" scope="col">Email</th>
+            <th class="table-success" scope="col">Imie</th>
+            <th class="table-success" scope="col">Nazwisko</th>
+            <th class="table-success" scope="col">Telefon</th>
+            <th class="table-success" scope="col">Akcje</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
+
+        @foreach ($konduktors as $konduktor)
+            <tr>
+                <th class="bg-secondary text-white" scope="row">{{$konduktor->id}}</th>
+                <td>{{$konduktor->email}}</td>
+                <td>{{$konduktor->name}}</td>
+                <td>{{$konduktor->surname}}</td>
+                <td>{{$konduktor->phone}}</td>
+                <td class="bg-secondary">
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ route('konduktor.delete', ['id'=>$konduktor->id])}}" role="button" class="btn btn-danger">X</a>
+                        <a href="{{ route('konduktor.edit', ['id'=>$konduktor->id]) }}" class="btn btn-success">Edit</a>
+                    </div>
+
+
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
+</div>
+
+
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; PKP S.A 2021</small></div>
     </div>
+
+
+
+
+
 @endsection
 

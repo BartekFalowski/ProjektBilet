@@ -10002,32 +10002,3 @@ h3 {
     border-color: #dee2e6;
   }
 }
-
-
-
-.Użytkownik{
-    background-color: #bfbfbf;
-    height: 500px;
-    margin-bottom: 50px;
-}
-.wyszukiwanie{
-    background-color: #5d5d61 !important;
-    margin-right: 300px;
-    margin-left: auto;
-    margin-top: 20px;
-    height: 300px;
-    width: 1200px;
-    justify-content: center;
-    display: flex;
-}
-.wyszukiwanie1{
-    height: 50px;
-}
-
-.p{
-    width: 390px;
-    height: 300px;
-    display: inline-block;
-}
-
-
