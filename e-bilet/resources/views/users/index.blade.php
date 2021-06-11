@@ -99,6 +99,7 @@
 
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a href="{{ route('users.delete', ['id'=>$user->id]) }}" role="button" class="btn btn-danger">X</a>
+                            <a href="{{ route('users.edit', ['id'=>$user->id]) }}" role="button" class="btn btn-info">Info</a>
                             <a href="{{ route('users.edit', ['id'=>$user->id]) }}" role="button" class="btn btn-success">Edit</a>
                         </div>
 

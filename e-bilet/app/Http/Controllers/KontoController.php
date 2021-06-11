@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Konduktor;
-use App\Models\Relacje;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class KontoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index',[
-            'users' => User::all()
+        return view('users.konto',[
+            'user' => User::all()
         ]);
     }
 
@@ -29,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.index');
+        /*return view('users.index');*/
     }
 
     /**
@@ -40,16 +38,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
+        /*$user = new User();
 
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->email = $request->email;
         $user->password = $request->password;
-       
+
         $user->save();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('message', 'Użytkownik został dodany pomyślnie');*/
     }
 
     /**
@@ -73,7 +71,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('users.edit', ['user'=>$user]);
+        return view('users.konto', ['user'=>$user]);
     }
 
     /**
@@ -91,9 +89,10 @@ class UserController extends Controller
         $user->surname = $request->surname;
         $user->email = $request->email;
 
+
         $user->save();
 
-        return redirect()->route('users.index')->with('message', 'Użytkownik został edytowany pomyślnie');
+        return redirect()->route('home')->with('message', 'Pomyślnie edytowałeś sowje dane');
     }
 
     /**
@@ -104,8 +103,6 @@ class UserController extends Controller
      */
     public function delete($id)
     {
-        User::destroy($id);
 
-        return redirect()->route('users.index')->with('message', 'Użytkownik został edytowany pomyślnie');
     }
 }

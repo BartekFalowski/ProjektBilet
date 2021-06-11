@@ -50,15 +50,26 @@
                     <label for="data">Data</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="timeod" name="timeod" type="time" placeholder="Podaj godzię." />
+                    <input class="form-control" id="timeod" name="timeod" type="time" placeholder="Podaj godzię..." />
                     <label for="timeod">Godzina odjazdu</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="timedo" name="timedo" type="time" placeholder="Podaj godzinę." />
+                    <input class="form-control" id="timedo" name="timedo" type="time" placeholder="Podaj godzinę..." />
                     <label for="timedo">Godzina przyjazdu</label>
                 </div>
 
-
+                <div class="form-inline">
+                <label class="my-4 mr-2" for="" name="timedo" type="time"><b><u>Liczba miejsc</u></b></label>
+                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                        <option selected>Wybierz</option>
+                        <option value="1">150</option>
+                        <option value="2">250</option>
+                        <option value="3">300</option>
+                    </select>
+                </div>
+            
+                
+                
                 <br />
                 <button class="btn btn-primary btn-xl" type="submit">Dodaj Relacje</button>
             </form>

@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,22 @@ Route::get('/', function () {
 });
 
 
+Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/konto/edytuj/{id}', [App\Http\Controllers\KontoController::class, 'edit'])->name('users.konto');
+Route::put('/home/konto/zamien/{id}', [App\Http\Controllers\KontoController::class, 'update'])->name('user.update');
+Route::get('/relacje/list', [App\Http\Controllers\ZnajdzRelacjeController::class, 'index'])->name('user.znajdz_relacje');
+Route::get('/home/Bilet/Lista', [App\Http\Controllers\Bilet_listaController::class, 'index'])->name('user.lista_bilet');
 
 
 
@@ -39,6 +50,7 @@ Auth::routes();
         Route::get('/login', 'App\Http\Controllers\Auth\AdminLoginController@showLoginForm')->name('admin.login');
         Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
         Route::post('/login', 'App\Http\Controllers\Auth\AdminLoginController@login')->name('admin.login.submit');
+        Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 
 

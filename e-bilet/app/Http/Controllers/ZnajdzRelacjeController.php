@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Konduktor;
 use App\Models\Relacje;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ZnajdzRelacjeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index',[
-            'users' => User::all()
+        return view('users.znajdz_relacje',[
+            'relacjes' => Relacje::all()
         ]);
     }
 
@@ -29,27 +28,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.index');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $user = new User();
-
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->password = $request->password;
-       
-        $user->save();
-
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -67,13 +57,11 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user = User::find($id);
-
-        return view('users.edit', ['user'=>$user]);
+        //
     }
 
     /**
@@ -81,19 +69,11 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('message', 'Użytkownik został edytowany pomyślnie');
+       //
     }
 
     /**
@@ -104,8 +84,6 @@ class UserController extends Controller
      */
     public function delete($id)
     {
-        User::destroy($id);
-
-        return redirect()->route('users.index')->with('message', 'Użytkownik został edytowany pomyślnie');
+        //
     }
 }
